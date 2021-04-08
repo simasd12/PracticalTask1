@@ -11,6 +11,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.HomePage;
 import pages.ProductPage;
+import pages.RegistrationPage;
 import pages.SearchResultPage;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
@@ -24,6 +25,7 @@ public class HometaskStepDefinitions {
     HomePage homePage;
     ProductPage productPage;
     SearchResultPage searchResultPage;
+    RegistrationPage registrationPage;
 
     @Before
     public void testsSetUp() {
@@ -34,6 +36,7 @@ public class HometaskStepDefinitions {
         homePage = pageFactoryManager.getHomePage();
         productPage = pageFactoryManager.getProductPage();
         searchResultPage = pageFactoryManager.getSearchResultPage();
+        registrationPage = pageFactoryManager.getRegistrationPage();
     }
 
     @After
@@ -65,7 +68,7 @@ public class HometaskStepDefinitions {
         assertTrue(productPage.isValueInTitle(value));
     }
 
-    @Then("User click the buy product button")
+    @Then("User clicks the buy product button")
     public void userClickTheBuyProductButton() {
         productPage.clickSpecificationsTabButton(); // нужен, потому что иначе картинка товара закрывает кнопку и тест падает
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, productPage.getBuyButton());
@@ -76,6 +79,55 @@ public class HometaskStepDefinitions {
     public void userChecksThatTheShoppingCartWindowHasAppeared() {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, productPage.getCartPopup());
         assertTrue(productPage.elementIsEnabled(productPage.getCartPopup()));
+    }
+
+    @And("User clicks profile button")
+    public void userClicksProfileButton() {
+        homePage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        homePage.clickUserProfileButton();
+    }
+
+    @When("User clicks registration button")
+    public void userClicksRegistrationButton() {
+        homePage.waitClickableOfElement(DEFAULT_TIMEOUT, homePage.getRegisterButton());
+        homePage.clickRegisterButton();
+    }
+
+    @And("User enters the {string} in the name field")
+    public void userEntersTheNameInTheNameField(final String name) {
+        registrationPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        registrationPage.enterDataInNameField(name);
+    }
+
+    @And("User enters the {string} in the surname field")
+    public void userEntersTheSurnameInTheSurnameField(final String surname) {
+        registrationPage.enterDataInSurnameField(surname);
+    }
+
+    @And("User enters the {string} in the phone field")
+    public void userEntersThePhoneInThePhoneField(final String phone) {
+        registrationPage.enterDataInPhoneField(phone);
+    }
+
+    @And("And User enters random invalid data in the email field")
+    public void andUserEntersRandomInvalidDataInTheEmailField() {
+        registrationPage.enterDataInEmailField();
+    }
+
+    @And("User enters the {string} in the password field")
+    public void userEntersThePasswordInThePasswordField(final String password) {
+        registrationPage.enterDataInPasswordField(password);
+    }
+
+    @Then("User clicks green registration button")
+    public void userClicksGreenRegistrationButton() {
+        registrationPage.clickRegistrationGreenButton();
+    }
+
+    @And("User checks error message about invalid email")
+    public void userChecksErrorMessageAboutInvalidEmail() {
+        registrationPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, registrationPage.getInvalidEmailMessage());
+        assertTrue(registrationPage.elementIsEnabled(registrationPage.getInvalidEmailMessage()));
     }
 
     @Then("User checks that the product catalog is empty")

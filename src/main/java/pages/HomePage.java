@@ -32,10 +32,6 @@ public class HomePage extends BasePage {
         searchField.sendKeys(value, Keys.ENTER);
     }
 
-    public WebElement getUserProfileButton() {
-        return userProfileButton;
-    }
-
     public void clickUserProfileButton() {
         userProfileButton.click();
     }

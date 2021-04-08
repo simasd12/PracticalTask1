@@ -3,6 +3,7 @@ package manager;
 import org.openqa.selenium.WebDriver;
 import pages.HomePage;
 import pages.ProductPage;
+import pages.RegistrationPage;
 import pages.SearchResultPage;
 
 public class PageFactoryManager {
@@ -24,5 +25,7 @@ public class PageFactoryManager {
     public ProductPage getProductPage() {
         return new ProductPage(driver);
     }
+
+    public RegistrationPage getRegistrationPage(){return new RegistrationPage(driver);}
 
 }
