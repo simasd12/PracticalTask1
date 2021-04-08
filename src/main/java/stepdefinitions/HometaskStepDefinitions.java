@@ -58,7 +58,7 @@ public class HometaskStepDefinitions {
     @And("User clicks on the {int}th product on the page")
     public void userClicksOnTheNumberProductOnThePage(int number) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
-        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
+        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(number));
         searchResultPage.clickOnProduct(number);
     }
 
@@ -148,8 +148,7 @@ public class HometaskStepDefinitions {
     @And("User checks that {string} sorting works correctly")
     public void userChecksThatSortingWorksCorrectly(final String sort) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
-        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
-        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(2));
         assertTrue(searchResultPage.checkSorting(sort));
     }
 
