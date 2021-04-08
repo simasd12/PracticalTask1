@@ -1,6 +1,9 @@
 package manager;
 
 import org.openqa.selenium.WebDriver;
+import pages.HomePage;
+import pages.ProductPage;
+import pages.SearchResultPage;
 
 public class PageFactoryManager {
 
@@ -8,6 +11,18 @@ public class PageFactoryManager {
 
     public PageFactoryManager(WebDriver driver) {
         this.driver = driver;
+    }
+
+    public HomePage getHomePage() {
+        return new HomePage(driver);
+    }
+
+    public SearchResultPage getSearchResultPage() {
+        return new SearchResultPage(driver);
+    }
+
+    public ProductPage getProductPage() {
+        return new ProductPage(driver);
     }
 
 }
