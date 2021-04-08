@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class HometaskStepDefinitions {
 
     private static final long DEFAULT_TIMEOUT = 60;
-    private static final int NUMBER = 1;
+    private static final int FIRST_PRODUCT_IN_LIST = 0;
     WebDriver driver;
     PageFactoryManager pageFactoryManager;
     HomePage homePage;
@@ -148,7 +148,7 @@ public class HometaskStepDefinitions {
     @And("User checks that {string} sorting works correctly")
     public void userChecksThatSortingWorksCorrectly(final String sort) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
-        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(NUMBER));
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(FIRST_PRODUCT_IN_LIST));
         assertTrue(searchResultPage.checkSorting(sort));
     }
 
@@ -163,25 +163,35 @@ public class HometaskStepDefinitions {
 
     @And("User clicks add to compare button")
     public void userClicksAddToCompareButton() {
+        productPage.waitClickableOfElement(DEFAULT_TIMEOUT, productPage.getAddToCompareButton());
+        productPage.clickAddToCompareButton();
     }
 
     @And("User checks that the libra icon appeared in the right corner")
     public void userChecksThatTheLibraIconAppearedInTheRightCorner() {
+        productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, productPage.getCompareButton());
+        assertTrue(productPage.elementIsEnabled(productPage.getCompareButton()));
     }
 
-    @And("User checks that the number near the libra icon is equal to {int}")
-    public void userChecksThatTheNumberNearTheLibraIconIsEqualToCount(int count) {
+    @And("User checks that the number near the libra icon is equal to {string}")
+    public void userChecksThatTheNumberNearTheLibraIconIsEqualToCount(String count) {
+        assertTrue(productPage.numberOfProductsInListIsCorrect(count));
     }
 
     @Then("User clicks compare button")
     public void userClicksCompareButton() {
+        productPage.clickCompareButton();
     }
 
     @And("User removes product from list")
     public void userRemovesProductFromList() {
+        productPage.waitClickableOfElement(DEFAULT_TIMEOUT, productPage.getRemoveProductFromCompareList());
+        productPage.clickRemoveProductFromCompareList();
     }
 
     @And("User checks that list is empty")
     public void userChecksThatListIsEmpty() {
+        productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, productPage.getCompareListIsEmptyMessage());
+        assertTrue(productPage.elementIsEnabled(productPage.getCompareListIsEmptyMessage()));
     }
 }

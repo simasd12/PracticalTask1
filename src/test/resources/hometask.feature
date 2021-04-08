@@ -60,7 +60,7 @@ Feature: Checking some site functionality
     And User clicks on the <number>th product on the page
     And User clicks add to compare button
     And User checks that the libra icon appeared in the right corner
-    And User checks that the number near the libra icon is equal to <count>
+    And User checks that the number near the libra icon is equal to '<count>'
     Then User clicks compare button
     And User removes product from list
     And User checks that list is empty
