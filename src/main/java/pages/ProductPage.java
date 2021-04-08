@@ -24,7 +24,7 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//span[@class='counter counter--gray']")
     private WebElement numberOfProductsInCompareList;
 
-    @FindBy(xpath = "//button[@aria-label='Удалить список Уцененные мобильные телефоны']")
+    @FindBy(xpath = "//button[contains(@class, 'remove')]")
     private WebElement removeProductFromCompareList;
 
     @FindBy(xpath = "//h3[@class='comparison-modal__heading']")
