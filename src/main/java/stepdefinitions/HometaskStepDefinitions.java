@@ -70,7 +70,7 @@ public class HometaskStepDefinitions {
 
     @Then("User clicks the buy product button")
     public void userClickTheBuyProductButton() {
-        //productPage.clickSpecificationsTabButton(); // нужен, потому что иначе картинка товара закрывает кнопку и тест падает
+        //productPage.clickSpecificationsTabButton();
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, productPage.getBuyButton());
         productPage.clickBuyButton();
     }
