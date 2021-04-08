@@ -58,7 +58,7 @@ public class HometaskStepDefinitions {
     @And("User clicks on the {int}th product on the page")
     public void userClicksOnTheNumberProductOnThePage(int number) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
-        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(number));
+        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
         searchResultPage.clickOnProduct(number);
     }
 
@@ -148,6 +148,8 @@ public class HometaskStepDefinitions {
     @And("User checks that {string} sorting works correctly")
     public void userChecksThatSortingWorksCorrectly(final String sort) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
         assertTrue(searchResultPage.checkSorting(sort));
     }
 
@@ -155,6 +157,7 @@ public class HometaskStepDefinitions {
     public void userChooseSortInAscendingOrder() {
         searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
         searchResultPage.clickSortMenuButton();
+        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getAscendingSortButton());
         searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getAscendingSortButton());
         searchResultPage.clickAscendingSortButton();
     }
