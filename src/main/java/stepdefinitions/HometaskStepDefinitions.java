@@ -186,6 +186,7 @@ public class HometaskStepDefinitions {
 
     @And("User removes product from list")
     public void userRemovesProductFromList() {
+        productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, productPage.getRemoveProductFromCompareList());
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, productPage.getRemoveProductFromCompareList());
         productPage.clickRemoveProductFromCompareList();
     }
