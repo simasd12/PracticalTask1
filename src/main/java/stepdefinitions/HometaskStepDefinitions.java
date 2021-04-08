@@ -70,7 +70,6 @@ public class HometaskStepDefinitions {
 
     @Then("User clicks the buy product button")
     public void userClickTheBuyProductButton() {
-        //productPage.clickSpecificationsTabButton();
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, productPage.getBuyButton());
         productPage.clickBuyButton();
     }
