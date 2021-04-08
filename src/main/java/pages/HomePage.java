@@ -28,7 +28,7 @@ public class HomePage extends BasePage {
         return searchField;
     }
 
-    public void enterValueAndDoSearch(String value){
+    public void enterValueAndDoSearch(String value) {
         searchField.sendKeys(value, Keys.ENTER);
     }
 

@@ -20,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class HometaskStepDefinitions {
 
     private static final long DEFAULT_TIMEOUT = 60;
-    private static final int FIRST_PRODUCT_IN_LIST = 0;
+    private static final int FIRST_PRODUCT_IN_LIST = 2;
     WebDriver driver;
     PageFactoryManager pageFactoryManager;
     HomePage homePage;
@@ -163,6 +163,7 @@ public class HometaskStepDefinitions {
 
     @And("User clicks add to compare button")
     public void userClicksAddToCompareButton() {
+        productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, productPage.getAddToCompareButton());
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, productPage.getAddToCompareButton());
         productPage.clickAddToCompareButton();
     }
