@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class HometaskStepDefinitions {
 
     private static final long DEFAULT_TIMEOUT = 60;
+    private static final int NUMBER = 1;
     WebDriver driver;
     PageFactoryManager pageFactoryManager;
     HomePage homePage;
@@ -147,7 +148,7 @@ public class HometaskStepDefinitions {
     @And("User checks that {string} sorting works correctly")
     public void userChecksThatSortingWorksCorrectly(final String sort) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
-        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(2));
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(NUMBER));
         assertTrue(searchResultPage.checkSorting(sort));
     }
 
@@ -158,5 +159,29 @@ public class HometaskStepDefinitions {
         searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getAscendingSortButton());
         searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getAscendingSortButton());
         searchResultPage.clickAscendingSortButton();
+    }
+
+    @And("User clicks add to compare button")
+    public void userClicksAddToCompareButton() {
+    }
+
+    @And("User checks that the libra icon appeared in the right corner")
+    public void userChecksThatTheLibraIconAppearedInTheRightCorner() {
+    }
+
+    @And("User checks that the number near the libra icon is equal to {int}")
+    public void userChecksThatTheNumberNearTheLibraIconIsEqualToCount(int count) {
+    }
+
+    @Then("User clicks compare button")
+    public void userClicksCompareButton() {
+    }
+
+    @And("User removes product from list")
+    public void userRemovesProductFromList() {
+    }
+
+    @And("User checks that list is empty")
+    public void userChecksThatListIsEmpty() {
     }
 }

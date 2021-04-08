@@ -53,3 +53,18 @@ Feature: Checking some site functionality
     Examples:
       | homePage                | value                         | DescSortType | AscSortType |
       | https://rozetka.com.ua/ | Apple iPhone 12 Pro Max 256GB | desc         | asc         |
+
+  Scenario Outline: Add/Remove products comparison
+    Given User opens '<homePage>' page
+    When User enters the '<value>' in the search field
+    And User clicks on the <number>th product on the page
+    And User clicks add to compare button
+    And User checks that the libra icon appeared in the right corner
+    And User checks that the number near the libra icon is equal to <count>
+    Then User clicks compare button
+    And User removes product from list
+    And User checks that list is empty
+
+    Examples:
+      | homePage                | value                         | number | count |
+      | https://rozetka.com.ua/ | Apple iPhone 12 Pro Max 256GB | 5      | 1     |

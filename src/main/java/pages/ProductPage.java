@@ -18,6 +18,9 @@ public class ProductPage extends BasePage{
     @FindBy(xpath = "//single-modal-window")
     private WebElement cartPopup;
 
+    @FindBy(xpath = "//button[@class='compare-button']")
+    private WebElement addToCompareButton;
+
     public ProductPage(WebDriver driver) {
         super(driver);
     }
@@ -40,5 +43,13 @@ public class ProductPage extends BasePage{
 
     public WebElement getCartPopup() {
         return cartPopup;
+    }
+
+    public WebElement getAddToCompareButton() {
+        return addToCompareButton;
+    }
+
+    public void clickAddToCompareButton() {
+        addToCompareButton.click();
     }
 }
