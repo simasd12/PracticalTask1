@@ -60,6 +60,7 @@ public class HometaskStepDefinitions {
     public void userClicksOnTheNumberProductOnThePage(int number) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
         searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(number));
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getProductOnPage(number));
         searchResultPage.clickOnProduct(number);
     }
 
