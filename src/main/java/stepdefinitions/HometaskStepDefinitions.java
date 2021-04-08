@@ -181,6 +181,7 @@ public class HometaskStepDefinitions {
 
     @Then("User clicks compare button")
     public void userClicksCompareButton() {
+        productPage.waitClickableOfElement(DEFAULT_TIMEOUT, productPage.getCompareButton());
         productPage.clickCompareButton();
     }
 

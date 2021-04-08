@@ -18,7 +18,7 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//button[@class='compare-button']")
     private WebElement addToCompareButton;
 
-    @FindBy(xpath = "//button[@aria-label='Списки сравнения']")
+    @FindBy(xpath = "//rz-comparison[@class='header-actions__component']//button[@class='header__button']")
     private WebElement compareButton;
 
     @FindBy(xpath = "//span[@class='counter counter--gray']")
