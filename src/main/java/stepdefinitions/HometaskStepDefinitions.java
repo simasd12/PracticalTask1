@@ -9,7 +9,9 @@ import io.cucumber.java.en.When;
 import manager.PageFactoryManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.*;
+import pages.HomePage;
+import pages.ProductPage;
+import pages.SearchResultPage;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static org.junit.Assert.assertTrue;
@@ -74,5 +76,34 @@ public class HometaskStepDefinitions {
     public void userChecksThatTheShoppingCartWindowHasAppeared() {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, productPage.getCartPopup());
         assertTrue(productPage.elementIsEnabled(productPage.getCartPopup()));
+    }
+
+    @Then("User checks that the product catalog is empty")
+    public void userChecksThatTheProductCatalogIsEmpty() {
+        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getEmptyCatalog());
+        assertTrue(searchResultPage.elementIsEnabled(searchResultPage.getEmptyCatalog()));
+    }
+
+    @And("User choose sort in descending order")
+    public void userChooseSortInDescendingOrder() {
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
+        searchResultPage.clickSortMenuButton();
+        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultPage.getDescendingSortButton());
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getDescendingSortButton());
+        searchResultPage.clickDescendingSortButton();
+    }
+
+    @And("User checks that {string} sorting works correctly")
+    public void userChecksThatSortingWorksCorrectly(final String sort) {
+        searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        assertTrue(searchResultPage.checkSorting(sort));
+    }
+
+    @Then("User choose sort in ascending order")
+    public void userChooseSortInAscendingOrder() {
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getSortMenuButton());
+        searchResultPage.clickSortMenuButton();
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, searchResultPage.getAscendingSortButton());
+        searchResultPage.clickAscendingSortButton();
     }
 }

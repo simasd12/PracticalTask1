@@ -10,6 +10,12 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//input[@name='search']")
     private WebElement searchField;
 
+    @FindBy(xpath = "//rz-user[@class='header-actions__component']/button[@class='header__button']")
+    private WebElement userProfileButton;
+
+    @FindBy(xpath = "//a[@class='auth-modal__register-link']")
+    private WebElement registerButton;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -26,4 +32,19 @@ public class HomePage extends BasePage {
         searchField.sendKeys(value, Keys.ENTER);
     }
 
+    public WebElement getUserProfileButton() {
+        return userProfileButton;
+    }
+
+    public void clickUserProfileButton() {
+        userProfileButton.click();
+    }
+
+    public WebElement getRegisterButton() {
+        return registerButton;
+    }
+
+    public void clickRegisterButton() {
+        registerButton.click();
+    }
 }
