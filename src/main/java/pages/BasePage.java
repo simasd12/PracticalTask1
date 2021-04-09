@@ -45,4 +45,8 @@ public class BasePage {
         return element.isDisplayed();
     }
 
+    public void refreshPage(){
+        driver.navigate().refresh();
+    }
+
 }

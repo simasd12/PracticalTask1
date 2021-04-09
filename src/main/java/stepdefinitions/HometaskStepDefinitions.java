@@ -148,9 +148,8 @@ public class HometaskStepDefinitions {
 
     @And("User checks that {string} sorting works correctly")
     public void userChecksThatSortingWorksCorrectly(final String sort) {
-        searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        searchResultPage.refreshPage();
         searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getSortMenuButton());
-        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getSortMenuButton());
         assertTrue(searchResultPage.checkSorting(sort));
     }
 
