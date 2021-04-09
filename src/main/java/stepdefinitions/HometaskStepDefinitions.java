@@ -167,6 +167,9 @@ public class HometaskStepDefinitions {
     public void userClicksAddToCompareButton() {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getAddToCompareButton());
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getAddToCompareButton());
+        if (productPage.elementIsEnabled(productPage.getPopupAdvCloseButton())) {
+            productPage.clickPopupAdvCloseButton();
+        }
         productPage.clickAddToCompareButton();
     }
 

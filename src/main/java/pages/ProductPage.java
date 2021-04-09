@@ -30,6 +30,9 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//h3[@class='comparison-modal__heading']")
     private WebElement compareListIsEmptyMessage;
 
+    @FindBy(xpath = "//span[@class='exponea-close-cross']")
+    private WebElement popupAdvCloseButton;
+
     public ProductPage(WebDriver driver) {
         super(driver);
     }
@@ -84,5 +87,13 @@ public class ProductPage extends BasePage {
 
     public WebElement getCompareListIsEmptyMessage() {
         return compareListIsEmptyMessage;
+    }
+
+    public WebElement getPopupAdvCloseButton() {
+        return popupAdvCloseButton;
+    }
+
+    public void clickPopupAdvCloseButton() {
+        popupAdvCloseButton.click();
     }
 }
