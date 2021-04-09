@@ -2,7 +2,6 @@ package stepdefinitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,7 +20,7 @@ import static org.junit.Assert.assertTrue;
 public class HometaskStepDefinitions {
 
     private static final long DEFAULT_TIMEOUT = 30;
-    private static final long DEFAULT_POLLING_TIMEOUT = 3;
+    private static final long DEFAULT_POLLING_TIMEOUT = 2;
     WebDriver driver;
     PageFactoryManager pageFactoryManager;
     HomePage homePage;
