@@ -35,6 +35,9 @@ public class ProductPage extends BasePage {
     @FindBy(xpath = "//span[@class='exponea-close-cross']")
     private WebElement popupAdvCloseButton;
 
+    @FindBy(xpath = "//li[@class='tabs__item']/a[contains(@href, 'characteristics')]")
+    private WebElement specificationsButton;
+
     public ProductPage(WebDriver driver) {
         super(driver);
     }
@@ -65,5 +68,9 @@ public class ProductPage extends BasePage {
 
     public void clickPopupAdvCloseButton() {
         popupAdvCloseButton.click();
+    }
+
+    public void clickSpecificationsButton() {
+        specificationsButton.click();
     }
 }

@@ -10,10 +10,7 @@ import io.cucumber.java.en.When;
 import manager.PageFactoryManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.HomePage;
 import pages.ProductPage;
@@ -26,7 +23,7 @@ import java.io.IOException;
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static org.junit.Assert.assertTrue;
 
-public class HometaskStepDefinitions {
+public class HometaskSteps {
 
     private static final long DEFAULT_TIMEOUT = 30;
     private static final long DEFAULT_POLLING_TIMEOUT = 2;
@@ -36,7 +33,7 @@ public class HometaskStepDefinitions {
     ProductPage productPage;
     SearchResultPage searchResultPage;
     RegistrationPage registrationPage;
-    private static final Logger logger = Logger.getLogger(HometaskStepDefinitions.class.getName());
+    private static final Logger logger = Logger.getLogger(HometaskSteps.class.getName());
 
     @Before
     public void testsSetUp() {
@@ -66,100 +63,102 @@ public class HometaskStepDefinitions {
         driver.close();
     }
 
-    @Given("User opens {string} page")
+    @Given("open {string} page")
     public void openHomePage(final String url) {
         homePage.openHomePage(url);
     }
 
-    @When("User enters the {string} in the search field")
-    public void userEntersTheValueInTheSearchField(final String value) {
+    @When("enter {string} in search field")
+    public void EnterValueInSearchField(final String value) {
         homePage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, homePage.getSearchField());
         homePage.enterValueAndDoSearch(value);
     }
 
-    @And("User clicks on the {int}th product on the page")
-    public void userClicksOnTheNumberProductOnThePage(int number) {
+    @And("click {string}st product on page")
+    public void clickProductOnPage(String number) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
         searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getFilterSubmitButton());
         searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getFilterSubmitButton());
-        searchResultPage.clickOnProduct(number);
+        searchResultPage.clickOnProduct(Integer.parseInt(number));
     }
 
-    @And("User checks the presence of the {string} in the product name")
-    public void userChecksThePresenceOfTheSearchValueInTheProductName(final String value) {
+    @Then("check presence of {string} in product name")
+    public void checkPresenceOfSearchValueInProductName(final String value) {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getProductTittle());
         assertTrue(productPage.isValueInTitle(value));
     }
 
-    @Then("User clicks the buy product button")
-    public void userClickTheBuyProductButton() {
+    @When("click buy product button")
+    public void clickBuyProductButton() {
+        productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getSpecificationsButton());
+        productPage.clickSpecificationsButton();
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getBuyButton());
         productPage.clickBuyButton();
     }
 
-    @And("User checks that the shopping cart window has appeared")
-    public void userChecksThatTheShoppingCartWindowHasAppeared() {
+    @Then("check that cart window has appeared")
+    public void checkThatCartWindowHasAppeared() {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getCartPopup());
         assertTrue(productPage.elementIsEnabled(productPage.getCartPopup()));
     }
 
-    @And("User clicks profile button")
-    public void userClicksProfileButton() {
+    @When("click profile button")
+    public void clickProfileButton() {
         homePage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
         homePage.clickUserProfileButton();
     }
 
-    @When("User clicks registration button")
-    public void userClicksRegistrationButton() {
+    @And("click registration button")
+    public void clickRegistrationButton() {
         homePage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, homePage.getRegisterButton());
         homePage.clickRegisterButton();
     }
 
-    @And("User enters the {string} in the name field")
-    public void userEntersTheNameInTheNameField(final String name) {
+    @And("enter {string} in name field")
+    public void enterNameInNameField(final String name) {
         registrationPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
         registrationPage.enterDataInNameField(name);
     }
 
-    @And("User enters the {string} in the surname field")
-    public void userEntersTheSurnameInTheSurnameField(final String surname) {
+    @And("enter {string} in surname field")
+    public void enterSurnameInSurnameField(final String surname) {
         registrationPage.enterDataInSurnameField(surname);
     }
 
-    @And("User enters the {string} in the phone field")
-    public void userEntersThePhoneInThePhoneField(final String phone) {
+    @And("enter {string} in phone field")
+    public void enterPhoneInPhoneField(final String phone) {
         registrationPage.enterDataInPhoneField(phone);
     }
 
-    @And("And User enters random invalid data in the email field")
-    public void andUserEntersRandomInvalidDataInTheEmailField() {
+    @And("enter random invalid data in email field")
+    public void enterRandomInvalidDataInEmailField() {
         registrationPage.enterDataInEmailField();
     }
 
-    @And("User enters the {string} in the password field")
-    public void userEntersThePasswordInThePasswordField(final String password) {
+    @And("enter {string} in password field")
+    public void enterPasswordInPasswordField(final String password) {
         registrationPage.enterDataInPasswordField(password);
     }
 
-    @Then("User clicks green registration button")
-    public void userClicksGreenRegistrationButton() {
+    @And("click green registration button")
+    public void clickGreenRegistrationButton() {
         registrationPage.clickRegistrationGreenButton();
     }
 
-    @And("User checks error message about invalid email")
-    public void userChecksErrorMessageAboutInvalidEmail() {
+    @Then("check error message about invalid email")
+    public void checksErrorMessageAboutInvalidEmail() {
         registrationPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, registrationPage.getInvalidEmailMessage());
         assertTrue(registrationPage.elementIsEnabled(registrationPage.getInvalidEmailMessage()));
     }
 
-    @Then("User checks that the product catalog is empty")
-    public void userChecksThatTheProductCatalogIsEmpty() {
+    @Then("check that product catalog is empty")
+    public void checkThatProductCatalogIsEmpty() {
         searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getEmptyCatalog());
         assertTrue(searchResultPage.elementIsEnabled(searchResultPage.getEmptyCatalog()));
     }
 
-    @And("User choose sort in descending order")
-    public void userChooseSortInDescendingOrder() {
+    @And("choose sort in descending order")
+    public void chooseSortInDescendingOrder() {
         searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getSortMenuButton());
         searchResultPage.clickSortMenuButton();
         searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getDescendingSortButton());
@@ -167,15 +166,15 @@ public class HometaskStepDefinitions {
         searchResultPage.clickDescendingSortButton();
     }
 
-    @And("User checks that {string} sorting works correctly")
-    public void userChecksThatSortingWorksCorrectly(final String sort) {
+    @Then("check that {string} sorting works correctly")
+    public void checksThatSortingWorksCorrectly(final String sort) {
         searchResultPage.refreshPage();
         searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getSortMenuButton());
         assertTrue(searchResultPage.checkSorting(sort));
     }
 
-    @Then("User choose sort in ascending order")
-    public void userChooseSortInAscendingOrder() {
+    @And("choose sort in ascending order")
+    public void chooseSortInAscendingOrder() {
         searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getSortMenuButton());
         searchResultPage.clickSortMenuButton();
         searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getAscendingSortButton());
@@ -183,46 +182,49 @@ public class HometaskStepDefinitions {
         searchResultPage.clickAscendingSortButton();
     }
 
-    @And("User clicks add to compare button")
-    public void userClicksAddToCompareButton() {
-        productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getAddToCompareButton());
-        productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getAddToCompareButton());
+    @And("click add to compare button")
+    public void clickAddToCompareButton() {
+        productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getSpecificationsButton());
+        productPage.clickSpecificationsButton();
         try {
             if (productPage.elementIsEnabled(productPage.getPopupAdvCloseButton())) {
                 productPage.clickPopupAdvCloseButton();
             }
         } catch (NoSuchElementException e) {
             logger.error("Popup adv is not appeared: " + e.getMessage());
+        } catch (StaleElementReferenceException e) {
+            logger.error("Popup adv error: " + e.getMessage());
         }
+        productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getAddToCompareButton());
         productPage.clickAddToCompareButton();
     }
 
-    @And("User checks that the libra icon appeared in the right corner")
-    public void userChecksThatTheLibraIconAppearedInTheRightCorner() {
+    @Then("check that libra icon appeared in right corner")
+    public void checkThatLibraIconAppearedInRightCorner() {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getCompareButton());
         assertTrue(productPage.elementIsEnabled(productPage.getCompareButton()));
     }
 
-    @And("User checks that the number near the libra icon is equal to {string}")
-    public void userChecksThatTheNumberNearTheLibraIconIsEqualToCount(String count) {
+    @And("check that number near libra icon is equal to {string}")
+    public void checkThatNumberNearLibraIconIsEqualToCount(String count) {
         assertTrue(productPage.numberOfProductsInListIsCorrect(count));
     }
 
-    @Then("User clicks compare button")
-    public void userClicksCompareButton() {
+    @When("click compare button")
+    public void clickCompareButton() {
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getCompareButton());
         productPage.clickCompareButton();
     }
 
-    @And("User removes product from list")
-    public void userRemovesProductFromList() {
+    @And("remove product from list")
+    public void removeProductFromList() {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getRemoveProductFromCompareList());
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getRemoveProductFromCompareList());
         productPage.clickRemoveProductFromCompareList();
     }
 
-    @And("User checks that list is empty")
-    public void userChecksThatListIsEmpty() {
+    @Then("check that list is empty")
+    public void checkThatListIsEmpty() {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getCompareListIsEmptyMessage());
         assertTrue(productPage.elementIsEnabled(productPage.getCompareListIsEmptyMessage()));
     }

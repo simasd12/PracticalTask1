@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        plugin = {"json:target/cucumber.json"},
+        plugin = {"html:target/cucumber-report/hometaskTest"},
         features = "src/test/resources",
         glue = "stepdefinitions"
 )
