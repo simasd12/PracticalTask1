@@ -83,8 +83,8 @@ public class HometaskStepDefinitions {
     @And("User clicks on the {int}th product on the page")
     public void userClicksOnTheNumberProductOnThePage(int number) {
         searchResultPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
-        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getSortMenuButton());
-        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getSortMenuButton());
+        searchResultPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getFilterSubmitButton());
+        searchResultPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, searchResultPage.getFilterSubmitButton());
         searchResultPage.clickOnProduct(number);
     }
 

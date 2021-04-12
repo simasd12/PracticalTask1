@@ -27,16 +27,15 @@ public class SearchResultPage extends BasePage {
     @FindBy(xpath = "//div[@class='goods-tile']//span[@class='goods-tile__price-value']")
     private List<WebElement> productsPricesList;
 
+    @FindBy(xpath = "//button[contains(@class, \"filter__button\")]")
+    private WebElement filterSubmitButton;
+
     public SearchResultPage(WebDriver driver) {
         super(driver);
     }
 
     public void clickOnProduct(int number) {
         productsOnPageList.get(number - 1).click();
-    }
-
-    public WebElement getProductOnPage(int number) {
-        return productsOnPageList.get(number - 1);
     }
 
     public WebElement getEmptyCatalog() {
@@ -79,4 +78,7 @@ public class SearchResultPage extends BasePage {
         ascendingSortButton.click();
     }
 
+    public WebElement getFilterSubmitButton() {
+        return filterSubmitButton;
+    }
 }
