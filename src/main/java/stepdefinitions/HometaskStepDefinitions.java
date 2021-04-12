@@ -1,18 +1,30 @@
 package stepdefinitions;
 
+import io.cucumber.core.backend.StepDefinition;
 import io.cucumber.java.After;
+import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.messages.Messages;
+import io.cucumber.plugin.event.Step;
 import manager.PageFactoryManager;
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.HomePage;
 import pages.ProductPage;
 import pages.RegistrationPage;
 import pages.SearchResultPage;
+
+import java.io.File;
+import java.io.IOException;
 
 import static io.github.bonigarcia.wdm.WebDriverManager.chromedriver;
 import static org.junit.Assert.assertTrue;
@@ -27,6 +39,7 @@ public class HometaskStepDefinitions {
     ProductPage productPage;
     SearchResultPage searchResultPage;
     RegistrationPage registrationPage;
+    private static final Logger logger = Logger.getLogger(HometaskStepDefinitions.class.getName());
 
     @Before
     public void testsSetUp() {
@@ -41,7 +54,18 @@ public class HometaskStepDefinitions {
     }
 
     @After
-    public void tearDown() {
+    public void tearDown(Scenario scenario) {
+        if(scenario.isFailed()) {
+            try {
+                double screenID = (Math.random()*(9901))+100;
+                File screenshot = ((TakesScreenshot) driver)
+                        .getScreenshotAs(OutputType.FILE);
+                FileUtils.copyFile(screenshot, new File("./Screenshots/" +  screenID + "ErrorScreen.png"));
+            } catch (IOException e) {
+                logger.error("Screenshot error: " + e.getMessage());
+            }
+        }
+        logger.info("Scenario: "+scenario.getName() + " is " + scenario.getStatus());
         driver.close();
     }
 
