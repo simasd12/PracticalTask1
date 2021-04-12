@@ -1,5 +1,6 @@
 package pages;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@Getter
 public class RegistrationPage extends BasePage {
 
     @FindBy(xpath = "//input[@formcontrolname='name']")
@@ -63,9 +65,5 @@ public class RegistrationPage extends BasePage {
 
     public void clickRegistrationGreenButton() {
         registrationGreenButton.click();
-    }
-
-    public WebElement getInvalidEmailMessage() {
-        return invalidEmailMessage;
     }
 }

@@ -1,9 +1,11 @@
 package pages;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+@Getter
 public class ProductPage extends BasePage {
 
     @FindBy(xpath = "//h1[@class='product__title']")
@@ -37,28 +39,12 @@ public class ProductPage extends BasePage {
         super(driver);
     }
 
-    public WebElement getProductTittle() {
-        return productTittle;
-    }
-
     public boolean isValueInTitle(String value) {
         return productTittle.getText().contains(value);
     }
 
     public void clickBuyButton() {
         buyButton.click();
-    }
-
-    public WebElement getBuyButton() {
-        return buyButton;
-    }
-
-    public WebElement getCartPopup() {
-        return cartPopup;
-    }
-
-    public WebElement getAddToCompareButton() {
-        return addToCompareButton;
     }
 
     public void clickAddToCompareButton() {
@@ -69,28 +55,12 @@ public class ProductPage extends BasePage {
         return numberOfProductsInCompareList.getText().contains(number);
     }
 
-    public WebElement getRemoveProductFromCompareList() {
-        return removeProductFromCompareList;
-    }
-
     public void clickRemoveProductFromCompareList() {
         removeProductFromCompareList.click();
     }
 
-    public WebElement getCompareButton() {
-        return compareButton;
-    }
-
     public void clickCompareButton() {
         compareButton.click();
-    }
-
-    public WebElement getCompareListIsEmptyMessage() {
-        return compareListIsEmptyMessage;
-    }
-
-    public WebElement getPopupAdvCloseButton() {
-        return popupAdvCloseButton;
     }
 
     public void clickPopupAdvCloseButton() {

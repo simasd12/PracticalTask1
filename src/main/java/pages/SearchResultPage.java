@@ -1,12 +1,13 @@
 package pages;
 
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-
+@Getter
 public class SearchResultPage extends BasePage {
 
     @FindBy(xpath = "//a[@class='goods-tile__picture']")
@@ -38,20 +39,8 @@ public class SearchResultPage extends BasePage {
         productsOnPageList.get(number - 1).click();
     }
 
-    public WebElement getEmptyCatalog() {
-        return emptyCatalog;
-    }
-
-    public WebElement getSortMenuButton() {
-        return sortMenuButton;
-    }
-
     public void clickSortMenuButton() {
         sortMenuButton.click();
-    }
-
-    public WebElement getDescendingSortButton() {
-        return descendingSortButton;
     }
 
     public void clickDescendingSortButton() {
@@ -70,15 +59,8 @@ public class SearchResultPage extends BasePage {
         return true;
     }
 
-    public WebElement getAscendingSortButton() {
-        return ascendingSortButton;
-    }
-
     public void clickAscendingSortButton() {
         ascendingSortButton.click();
     }
 
-    public WebElement getFilterSubmitButton() {
-        return filterSubmitButton;
-    }
 }

@@ -1,16 +1,12 @@
 package stepdefinitions;
 
-import io.cucumber.core.backend.StepDefinition;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.messages.Messages;
-import io.cucumber.plugin.event.Step;
 import manager.PageFactoryManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
@@ -55,17 +51,17 @@ public class HometaskStepDefinitions {
 
     @After
     public void tearDown(Scenario scenario) {
-        if(scenario.isFailed()) {
+        if (scenario.isFailed()) {
             try {
-                double screenID = (Math.random()*(9901))+100;
+                double screenID = (Math.random() * (9901)) + 100;
                 File screenshot = ((TakesScreenshot) driver)
                         .getScreenshotAs(OutputType.FILE);
-                FileUtils.copyFile(screenshot, new File("./Screenshots/" +  screenID + "ErrorScreen.png"));
+                FileUtils.copyFile(screenshot, new File("./Screenshots/" + screenID + "ErrorScreen.png"));
             } catch (IOException e) {
                 logger.error("Screenshot error: " + e.getMessage());
             }
         }
-        logger.info("Scenario: "+scenario.getName() + " is " + scenario.getStatus());
+        logger.info("Scenario: " + scenario.getName() + " is " + scenario.getStatus());
         driver.close();
     }
 

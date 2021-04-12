@@ -1,10 +1,12 @@
 package pages;
 
+import lombok.Getter;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+@Getter
 public class HomePage extends BasePage {
 
     @FindBy(xpath = "//input[@name='search']")
@@ -24,20 +26,12 @@ public class HomePage extends BasePage {
         driver.get(url);
     }
 
-    public WebElement getSearchField() {
-        return searchField;
-    }
-
     public void enterValueAndDoSearch(String value) {
         searchField.sendKeys(value, Keys.ENTER);
     }
 
     public void clickUserProfileButton() {
         userProfileButton.click();
-    }
-
-    public WebElement getRegisterButton() {
-        return registerButton;
     }
 
     public void clickRegisterButton() {
