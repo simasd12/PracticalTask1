@@ -187,6 +187,7 @@ public class HometaskSteps {
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getSpecificationsButton());
         productPage.clickSpecificationsButton();
         try {
+            productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getPopupAdvCloseButton());
             if (productPage.elementIsEnabled(productPage.getPopupAdvCloseButton())) {
                 productPage.clickPopupAdvCloseButton();
             }
