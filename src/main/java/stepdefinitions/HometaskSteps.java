@@ -193,6 +193,8 @@ public class HometaskSteps {
             logger.error("Popup adv is not appeared: " + e.getMessage());
         } catch (TimeoutException e) {
             logger.error("Popup adv time error: " + e.getMessage());
+        } catch (StaleElementReferenceException e){
+            logger.error("Popup adv error: " + e.getMessage());
         }
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getAddToCompareButton());
         productPage.clickAddToCompareButton();
