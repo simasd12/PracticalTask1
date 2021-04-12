@@ -10,6 +10,7 @@ import io.cucumber.java.en.When;
 import manager.PageFactoryManager;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -186,8 +187,12 @@ public class HometaskStepDefinitions {
     public void userClicksAddToCompareButton() {
         productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getAddToCompareButton());
         productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getAddToCompareButton());
-        if (productPage.elementIsEnabled(productPage.getPopupAdvCloseButton())) {
-            productPage.clickPopupAdvCloseButton();
+        try {
+            if (productPage.elementIsEnabled(productPage.getPopupAdvCloseButton())) {
+                productPage.clickPopupAdvCloseButton();
+            }
+        } catch (NoSuchElementException e) {
+            logger.error("Popup adv is not appeared: " + e.getMessage());
         }
         productPage.clickAddToCompareButton();
     }
