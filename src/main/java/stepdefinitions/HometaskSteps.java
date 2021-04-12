@@ -184,8 +184,6 @@ public class HometaskSteps {
 
     @And("click add to compare button")
     public void clickAddToCompareButton() {
-        productPage.waitClickableOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getSpecificationsButton());
-        productPage.clickSpecificationsButton();
         try {
             productPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, DEFAULT_POLLING_TIMEOUT, productPage.getPopupAdvCloseButton());
             if (productPage.elementIsEnabled(productPage.getPopupAdvCloseButton())) {
