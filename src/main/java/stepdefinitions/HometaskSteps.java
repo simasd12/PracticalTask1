@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 
 public class HometaskSteps {
 
-    private static final long DEFAULT_TIMEOUT = 30;
+    private static final long DEFAULT_TIMEOUT = 10; // was 30
     private static final long DEFAULT_POLLING_TIMEOUT = 2;
     WebDriver driver;
     PageFactoryManager pageFactoryManager;
