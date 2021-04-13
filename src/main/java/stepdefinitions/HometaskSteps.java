@@ -58,7 +58,7 @@ public class HometaskSteps {
                 double screenID = (Math.random() * (9901)) + 100;
                 File screenshot = ((TakesScreenshot) driver)
                         .getScreenshotAs(OutputType.FILE);
-                FileUtils.copyFile(screenshot, new File("./Screenshots/" + screenID + "ErrorScreen.png"));
+                FileUtils.copyFile(screenshot, new File("./screenshots/" + screenID + "errorScreen.png"));
             } catch (IOException e) {
                 logger.error("Screenshot error: " + e.getMessage());
             }
@@ -131,19 +131,19 @@ public class HometaskSteps {
     public void enterNameInNameField(final String name) {
         registrationPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
         registrationPage.enterDataInNameField(name);
-        logger.info("Enter " + name + " in name field");
+        logger.info("Enter '" + name + "' in name field");
     }
 
     @And("enter {string} in surname field")
     public void enterSurnameInSurnameField(final String surname) {
         registrationPage.enterDataInSurnameField(surname);
-        logger.info("Enter " + surname + " in surname field");
+        logger.info("Enter '" + surname + "' in surname field");
     }
 
     @And("enter {string} in phone field")
     public void enterPhoneInPhoneField(final String phone) {
         registrationPage.enterDataInPhoneField(phone);
-        logger.info("Enter " + phone + " in phone field");
+        logger.info("Enter '" + phone + "' in phone field");
     }
 
     @And("enter random invalid data in email field")
@@ -155,7 +155,7 @@ public class HometaskSteps {
     @And("enter {string} in password field")
     public void enterPasswordInPasswordField(final String password) {
         registrationPage.enterDataInPasswordField(password);
-        logger.info("Enter " + password + " in password field");
+        logger.info("Enter '" + password + "' in password field");
     }
 
     @And("click green registration button")
