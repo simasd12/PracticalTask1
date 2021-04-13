@@ -10,9 +10,9 @@ Feature: Checking some site functionality
   Scenario: Purchase of products
     When enter 'Apple iPhone 12 Pro Max 256GB' in search field
     And click '1'st product on page
-    Then check presence of 'Apple iPhone 12 Pro Max 256GB' in product name
+    Then 'Apple iPhone 12 Pro Max 256GB' is presence in product name
     When click buy product button
-    Then check that cart window has appeared
+    Then cart window has appeared
 
   ######################################################################################################################
   Scenario: Invalid registration
@@ -24,12 +24,12 @@ Feature: Checking some site functionality
     And enter random invalid data in email field
     And enter 'TestSuite1872' in password field
     And click green registration button
-    Then check error message about invalid email
+    Then error message about invalid email
 
   ######################################################################################################################
   Scenario Outline: Empty search
     When enter '<value>' in search field
-    Then check that product catalog is empty
+    Then product catalog is empty
 
     Examples:
       | value             |
@@ -41,17 +41,17 @@ Feature: Checking some site functionality
   Scenario: Sorting by price
     When enter 'Apple iPhone 12 Pro Max 256GB' in search field
     And choose sort in descending order
-    Then check that 'desc' sorting works correctly
-    And choose sort in ascending order
-    Then check that 'asc' sorting works correctly
+    Then 'desc' sorting works correctly
+    When choose sort in ascending order
+    Then 'asc' sorting works correctly
 
   ######################################################################################################################
   Scenario: Add/Remove products comparison
     When enter 'Apple iPhone 12 Pro Max 256GB' in search field
     And click '1'st product on page
     And click add to compare button
-    Then check that libra icon appeared in right corner
-    And check that number near libra icon is equal to '1'
+    Then libra icon appeared in right corner
+    And number near libra icon is equal to '1'
     When click compare button
     And remove product from list
-    Then check that list is empty
+    Then list is empty
